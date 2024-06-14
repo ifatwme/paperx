@@ -10,3 +10,7 @@ watchdog
 bump-my-version
 streamlit-pdf-viewer==0.0.11
 replicate
+openai
+llama-cpp-python[server]
+pydantic 
+instructor 

@@ -7,6 +7,7 @@ import dotenv
 from grobid_client.grobid_client import GrobidClient
 import replicate.account
 from streamlit_pdf_viewer import pdf_viewer
+from openai import OpenAI
 
 from grobid.grobid_processor import GrobidProcessor
 from functools import partial
@@ -68,6 +69,9 @@ if "messages" not in st.session_state.keys():
         }
     ]
 
+if "llama" not in st.session_state:
+    st.session_state["llama"] = None
+
 
 ### ---------- Methods ---------- ###
 def new_file():
@@ -84,6 +88,18 @@ def init_grobid():
         grobid_processor = GrobidProcessor(grobid_client)
 
         return grobid_processor
+    except:
+        return None
+
+
+@st.cache_resource
+def get_llama():
+    try:
+        client = OpenAI(
+            base_url="http://localhost:8080/v1",
+            api_key="tom",
+        )
+        return client
     except:
         return None
 
