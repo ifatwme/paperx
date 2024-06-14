@@ -1,3 +1,12 @@
 PyMuPDFb==1.23.3
 matplotlib
 numpy
+streamlit
+python-dotenv
+beautifulsoup4
+lxml
+grobid-client-python
+watchdog
+bump-my-version
+streamlit-pdf-viewer==0.0.11
+replicate
