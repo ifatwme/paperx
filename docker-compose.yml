@@ -1,23 +1,4 @@
-version: '3.8'
-
 services:
-  llama_server:
-    image: ghcr.io/ggerganov/llama.cpp:server
-    ports:
-      - "${LLAMA_SERVER_PORT}:8080"
-    volumes:
-      - ${LLAMA_MODEL_PATH}:/models
-    command:
-      [
-        "-m",
-        "models/${LLAMA_MODEL_FILE}",
-        "-c",
-        "512",
-        "--host",
-        "0.0.0.0",
-        "--port",
-        "8080"
-      ]
 
   streamlit_app:
     build:
@@ -33,11 +14,10 @@ services:
           "--fail",
           "http://localhost:8501/_stcore/health"
         ]
-    environment:
-      - PYTHONPATH=${PYTHONPATH}:.
     volumes:
       - ./.streamlit:/app/.streamlit
       - ./grobid:/app/grobid
+      - config.json:/app/config.json
     entrypoint:
       [
         "streamlit",
@@ -46,12 +26,16 @@ services:
         "--server.port=8501",
         "--server.address=0.0.0.0"
       ]
+    depends_on:
+      - grobid
 
   grobid:
     image: lfoppiano/grobid:0.8.0
     ports:
       - "${GROBID_PORT}:8070"
-    init: true
     ulimits:
-      core: 0
-    command: [ "server" ]
+      core:
+        soft: 0
+        hard: 0
+    init: true
+    restart: always

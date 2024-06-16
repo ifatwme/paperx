@@ -81,14 +81,30 @@ def new_file():
     st.session_state["binary"] = None
 
 
+# def init_grobid():
+#     try:
+#         grobid_client = GrobidClient(config_path="./config.json")
+#         grobid_processor = GrobidProcessor(grobid_client)
+
+#         return grobid_processor
+#     except:
+#         return None
+
+
 @st.cache_resource
 def init_grobid():
     try:
-        grobid_client = GrobidClient(config_path="./config.json")
+        # Initialize Grobid client or connection
+        grobid_client = GrobidClient()  # Replace with actual initialization code
         grobid_processor = GrobidProcessor(grobid_client)
-
-        return grobid_processor
-    except:
+        if grobid_processor:
+            print("Grobid client initialized successfully.")
+            return grobid_processor
+        else:
+            print("Failed to initialize Grobid client.")
+            return None
+    except Exception as e:
+        print(f"Exception occurred: {e}")
         return None
 
 
@@ -308,7 +324,13 @@ with right_column:
                 tmp_file = NamedTemporaryFile()
                 tmp_file.write(bytearray(binary))
                 st.session_state["binary"] = binary
-                annotations, pages = init_grobid().process_structure(tmp_file.name)
+                grobid_client = init_grobid()
+                if grobid_client:  # Check if grobid_client is not None
+                    annotations, pages = grobid_client.process_structure(tmp_file.name)
+                else:
+                    st.error(
+                        "Failed to initialize Grobid. Please check the server connection and try again."
+                    )
 
                 st.session_state["annotations"] = (
                     annotations
