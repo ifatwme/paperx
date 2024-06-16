@@ -6,6 +6,16 @@ Using llama and grobid tools, I have built an application where understanding pa
 
 the chatbot is provided by replicate api.
 
+<table>
+    <tr>
+        <td align="center"><img src="./docs/1.png" width="200px"></td>
+        <td align="center"><img src="./docs/2.png" width="200px"></td>
+    </tr>
+    <tr>
+        <td align="center"><img src="./docs/4.png" width="200px"></td>
+        <td align="center"><img src="./docs/5.png" width="200px"></td>
+    </tr>
+</table>
 
 ## Getting started
 you got two option in order to deploy and use this app
