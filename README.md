@@ -8,12 +8,12 @@ the chatbot is provided by replicate api.
 
 <table>
     <tr>
-        <td align="center"><img src="./docs/1.png" width="200px"></td>
-        <td align="center"><img src="./docs/2.png" width="200px"></td>
+        <td align="center"><img src="./docs/1.png" width="500px"></td>
+        <td align="center"><img src="./docs/2.png" width="500px"></td>
     </tr>
     <tr>
-        <td align="center"><img src="./docs/4.png" width="200px"></td>
-        <td align="center"><img src="./docs/5.png" width="200px"></td>
+        <td align="center"><img src="./docs/4.png" width="500px"></td>
+        <td align="center"><img src="./docs/5.png" width="500px"></td>
     </tr>
 </table>
 
